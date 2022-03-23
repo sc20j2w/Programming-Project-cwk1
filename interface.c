@@ -1,60 +1,57 @@
-#include "interface.h"
-
-#include "customer.h"
 #include "book_management.h"
 
-#include <stdio.h>
+#include "interface.h"
+
+#include<string.h>
+#include<stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 
-
- void main_menu() {
-    printf("Enter the number before the option and press enter to confirm.\n");
-    printf("1.Manager entrance\n");
-    printf("2.Reader entrance\n");
-    printf("3.Quit\n\n");
-    printf("Please choose an option:");
-}
-
-void mainchoose(){
-    char choose;
-    int tag = 1;
-    while(tag){
-        main_menu();
-        scanf(" %c", &choose);
-        getchar();
-        switch(choose)
-        {
-            case'1':
-                loginmain1();
+//beginning of the system
+void main_menu() {
+    while(1) {
+        printf("Please choose an option:\n");
+        printf("1) Register an account\n");
+        printf("2) Users login\n");
+        printf("3) Librarian login\n");+
+        printf("4) Search for books\n");
+        printf("5) Display all books\n");
+        printf("6) Quit\n");
+        printf("     option:");
+        int option;
+        scanf("%d", &option);
+        switch (option) {
+            case 1:
+                if (option == '1')
+                {
+                    if(register_user() == 2) //fail to register
+                    {
+                        printf("The username you entered has already existed, please choose an option again.\n");
+                    }
+                    fflush(stdin);
+                }
                 break;
-            case'2':
-                loginmain();
+            case 2:
                 break;
-            case'3':
-                printf("Press any key to continue..");
-                getch();
-                tag = 0;
+            case 3:
                 break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                printf("Thank you for using library\n");
+                return;
             default:
-                printf("\nInvalid option\n");
-                printf("Press any key to continue..");
-                getch();
+                printf("Sorry, the option you entered was invalid, please try again. \n");
                 break;
         }
-        system("cls");
     }
 }
 
-void run_interface() {
 
+void run_interface ()
+{
     main_menu();
-    mainchoose();
-    //time to clean up behind us.
-
-    customer_cleanup();
-    order_cleanup();
-
-    return;
 }
+

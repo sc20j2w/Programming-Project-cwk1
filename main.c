@@ -1,7 +1,12 @@
+#include "book_management.h"
+
 #include "interface.h"
 
-int main()
+#include <stdio.h>
+
+int main(void)
 {
+    printf("Welcome to use the library.\n");
     run_interface();
-    return 0;
 }
+
