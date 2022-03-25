@@ -3,71 +3,119 @@
 #include "interface.h"
 #include "user.h"
 
+#include "save.h"
 #include<string.h>
 #include<stdio.h>
 #include <stdlib.h>
 
+// judge user or librarian
+char *what_is_login(){
+
+}
+
+
+// choice 2
+int Login_user(){
+    char *tp;
+    tp = (char *) malloc(200*sizeof (char));
+    stpcpy(tp,what_is_login());
+    tp[strlen(tp)-1] = '\0';
+    if(strcmp(tp,"librarian") != 0 && strcmp(tp,"0") != 0)
+    {
+
+    }else if(strcmp(tp,"librarian") == 0)
+    {
+
+    }else if(strcmp(tp,"0") == 0)
+    {
+        printf("You entered a wrong Username or Password. \n");
+    }
+}
+
+// choice 1
 int register_user()
 {
-    FILE *fd;
-    fd = fopen("user.txt","a+");
-    char *temp3;
-    temp3 = (char *) malloc(200*sizeof (char));
-    printf("Please enter a name: ");
+    FILE *fh;
+    fh = fopen("user.txt","a+");
+    printf("Enter your Name: \n");
+    char *tp1;
+    tp1 = (char *) malloc(100 * sizeof (char));
     fflush(stdin);
-    gets(temp3);
-    printf("Please enter a Username: ");
-    char *temp1;
-    char *temp2;
-    temp1 = (char *) malloc(200*sizeof (char));
+    gets(tp1);
+    printf("Enter your Username: \n");
+    char *tp2;
+    char *tp3;
+    tp2 = (char *) malloc(100 * sizeof (char));
     fflush(stdin);
-    gets(temp1);
-    printf("Please enter a password: ");
-    temp2 = (char *) malloc(200*sizeof (char));
+    gets(tp2);
+    printf("Enter your Password: \n");
+    tp3 = (char *) malloc(100 * sizeof (char));
     fflush(stdin);
-    gets(temp2);
-    if(strcmp(temp1,"librarian")==0)
+    gets(tp3);
+    if(strcmp( tp2, "librarian") == 0)
     {
-        return 2;
+        printf("The username you entered has already existed, please choose an option again.\n");
+        return 0;
     }
-    worker *p,*q,*last;
+    User *tp;
+    tp = list;
+    tp = tp->next;
+    if(tp != NULL)
+    {
+        while(1)
+        {
+
+            tp->username[strlen(tp->username)-1] = '\0';
+            if(strcmp(tp->username,tp1)==0)
+            {
+                tp->username[strlen(tp->username)] = '\n';
+                printf("The username you entered has already existed, please choose an option again.\n");
+                return 0;
+            }
+            tp->username[strlen(tp->username)] = '\n';
+            tp = tp->next;
+            if(tp == NULL)
+            {
+                break;
+            }
+        }
+    }
+    User *head, *p, *last;
     last = list;
-    q = last;
-    p = last->next;
+    p = last;
+    head = p -> next;
     while(1)
     {
-        if(p == NULL)
+        if(head == NULL)
         {
-            p = (worker *) malloc(sizeof(worker));
-            p->username = (char *) malloc(200*sizeof(char));
-            stpcpy(p->username,temp1);
-            p->username[strlen(p->username)] = '\n';
-            p->password = (char *) malloc(200*sizeof(char));
-            stpcpy(p->password,temp2);
-            p->password[strlen(p->password)] = '\n';
-            p->book_id = (int *) malloc(10*sizeof (int));
-            p->name = (char *) malloc(200*sizeof (char));
-            stpcpy(p->name,temp3);
-            p->name[strlen(p->name)] = '\n';
-            p->next = NULL;
-            q->next = p;
+            //username
+            head = (User *) malloc(sizeof(User));
+            head->username = (char *) malloc(100 * sizeof(char));
+            strcpy(head->username,tp2);
+            head->username[strlen(head->username)] = '\n';
+            //password
+            head->password = (char *) malloc(100 * sizeof(char));
+            strcpy(head->password,tp3);
+            head->password[strlen(head->password)] = '\n';
+            //name
+            head->name = (char *) malloc(100 * sizeof (char));
+            strcpy(head -> name, tp1);
+            head->name[strlen(head -> name)] = '\n';
+            //id
+            head->book_id = (int *) malloc(100 * sizeof (int));
+            head->next = NULL;
+            p->next = head;
             break;
         }
-        p->username[strlen(p->username)-1] = '\0';
-        if(strcmp(p->username,temp1)== 0)
-        {
-            return 2;
-        }
-        q = p;
-        p = p->next;
+        p = head;
+        head = head->next;
     }
-    fputs(temp1,fd);
-    fputs("\n",fd);
-    fputs(temp2,fd);
-    fputs("\n",fd);
-    fputs(temp3,fd);
-    fputs("\n",fd);
-    printf("Registered library account successfully!");
-    printf("\n");
+    fputs(tp2,fh);
+    fputs("\n",fh);
+    fputs(tp3,fh);
+    fputs("\n",fh);
+    fputs(tp1,fh);
+    fputs("\n",fh);
+    printf("Succeeded in creating an account. \n");
     return 0;
 }

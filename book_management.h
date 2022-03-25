@@ -60,6 +60,14 @@ BookList find_book_by_author (const char *author);
 //list is the NULL pointer.
 BookList find_book_by_year (unsigned int year);
 
+typedef struct _user{
+    char *username; // Account for worker.(username)
+    char *password; // Account for worker.(password)
+    char *name;
+    int *book_id;
+    struct _user *next;//pointer to the next worker element.
+}User;
 
+User *list;
 
 #endif
