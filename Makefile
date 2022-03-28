@@ -1,8 +1,8 @@
 
 # code details
 
-EXE = ./bin/library
-SRC= main.c save.c user.c interface.c
+EXE = ./library
+SRC= main.c save.c user.c interface.c book_management.c
 
 # generic build details
 
@@ -29,7 +29,9 @@ clean:
 
 # dependencies
 
-main.o:      main.c book_management.h user.h save.h interface.h
-user.o:   user.c book_management.h user.h save.h interface.h
-save.o: save.c book_management.h user.h save.h interface.h
-interface.o:     interface.c book_management.h user.h save.h interface.h
+main.o: main.c book_management.h user.h save.h interface.h book_management.h
+user.o: user.c book_management.h user.h save.h interface.h book_management.h
+save.o: save.c book_management.h user.h save.h interface.h book_management.h
+interface.o: interface.c book_management.h user.h save.h interface.h book_management.h
+book_management.o: book_management.c book_management.h user.h save.h interface.h
+

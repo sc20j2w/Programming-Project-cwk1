@@ -1,22 +1,29 @@
 #include <stdio.h>
 
-#include "interface.h"
 #include "book_management.h"
-#include "save.h"
+#include "interface.h"
 #include "user.h"
+#include "save.h"
 
 
 
 int main()
 {
     printf("Welcome to the library!\n");
-    FILE *fh;
-    fh = fopen("user.txt","r");
-    if(fh == NULL)
+    FILE *fp;
+    fp = fopen("book.txt","r");
+    if(fp == NULL)
     {
-        fh = fopen("user.txt","w+");
+        fp = fopen("book.txt","w+");
     }
-    load_login(fh);
-    fclose(fh);
+    load_books(fp);
+    fclose(fp);
+    FILE *fd;
+    fd = fopen("user.txt","r");
+    if(fd == NULL)
+    {
+        fd = fopen("user.txt","w+");
+    }
+    load_login(fd);
     run_interface();
 }

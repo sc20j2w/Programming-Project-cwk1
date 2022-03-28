@@ -24,6 +24,7 @@ typedef struct _BookList {
     unsigned int length; // number of elements in the (Book*) List
 }BookList;
 
+BookList *bl_head;
 
 //saves the database of books in the specified file
 //returns 0 if books were stored correctly, or an error code otherwise
@@ -61,13 +62,14 @@ BookList find_book_by_author (const char *author);
 BookList find_book_by_year (unsigned int year);
 
 typedef struct _user{
-    char *username; // Account for worker.(username)
-    char *password; // Account for worker.(password)
+    char *username; // Account for user.(username)
+    char *password; // Account for user.(password)
     char *name;
     int *book_id;
-    struct _user *next;//pointer to the next worker element.
+    struct _user *next;//pointer to the next user element.
 }User;
 
-User *list;
+User *temp_list;
+
 
 #endif

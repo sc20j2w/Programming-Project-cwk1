@@ -1,64 +1,195 @@
 #include "book_management.h"
-
 #include "interface.h"
 #include "user.h"
-
 #include "save.h"
+
 #include<string.h>
 #include<stdio.h>
 #include <stdlib.h>
 
-// judge user or librarian
-char *what_is_login(){
-
-}
-
 
 // choice 2
-int Login_user(){
-    char *tp;
-    tp = (char *) malloc(200*sizeof (char));
-    stpcpy(tp,what_is_login());
-    tp[strlen(tp)-1] = '\0';
-    if(strcmp(tp,"librarian") != 0 && strcmp(tp,"0") != 0)
-    {
-
-    }else if(strcmp(tp,"librarian") == 0)
-    {
-
-    }else if(strcmp(tp,"0") == 0)
-    {
-        printf("You entered a wrong Username or Password. \n");
+int Login() {
+    char *a = "librarian";
+    char *tp1, *tp2;
+    tp1 = (char *) malloc(100 * sizeof(char));
+    tp2 = (char *) malloc(100 * sizeof(char));
+    printf("Enter your username: ");
+    fflush(stdin);
+    scanf("%s",tp1);
+    getchar();
+    printf("Enter your password: ");
+    fflush(stdin);
+    scanf("%s",tp2);
+    getchar();
+    // if librarian
+    if (strcmp(tp1, a) == 0 && strcmp(tp2, a) == 0) {
+        while(1){
+            printf("\n");
+            printf("You are logging in as: librarian \n");
+            printf("1) Add a book \n");
+            printf("2) Remove a book \n");
+            printf("3) Search for books \n");
+            printf("4) Display all books \n");
+            printf("5) Log out \n");
+            printf("        Option: ");
+            int option;
+            while(1){
+                int j = 0;
+                scanf("%d", &option);
+                while(getchar() != '\n') j++;
+                if(j > 0) {
+                    printf("Sorry, the option you entered was invalid, please try again.\n");printf("You are logging in as: librarian \n");
+                    printf("1) Add a book \n");
+                    printf("2) Remove a book \n");
+                    printf("3) Search for books \n");
+                    printf("4) Display all books \n");
+                    printf("5) Log out \n");
+                    printf("        Option: ");
+                    continue;
+                }else break;
+            }
+            if (option == 1) {
+                char *temp;
+                Book book;
+                temp = (char *) malloc(200*sizeof (char));
+                printf("Enter the title of the book you wish to add: \n");
+                fflush(stdin);
+                gets(temp);
+                book.title = (char *) malloc(200*sizeof(char));
+                strcpy(book.title,temp);
+                printf("Enter the author of the book you wish to add: \n");
+                fflush(stdin);
+                gets(temp);
+                book.authors = (char *) malloc(200*sizeof(char));
+                strcpy(book.authors,temp);
+                printf("Enter the year that the book you wish to add: \n");
+                fflush(stdin);
+                gets(temp);
+                book.year = atoi(temp);
+                printf("Enter the number of copies of the book that you wish to add: \n");
+                fflush(stdin);
+                gets(temp);
+                book.copies = atoi(temp);
+                free(temp);
+                add_book(book);
+                break;
+            }else if(option == 2) {
+                break;
+            }else if(option == 3) {
+                break;
+            }else if(option == 4) {
+                Display_books_login();
+                break;
+            }else if(option == 5) {
+                printf("Thank you for logging, goodbye.\n");
+                main_menu();
+            }else if (option != 1 && option != 2 && option != 3 && option != 4 && option != 5){
+                printf("Sorry, the option you entered was invalid, please try again. \n");
+                continue;
+            }
+        }
+    }
+    // not librarian
+    else{
+        User *p;
+        p = temp_list;
+        p = p->next;
+        tp1[strlen(tp1)] = '\n';
+        tp2[strlen(tp2)] = '\n';
+        while(1)
+        {
+            if (p == NULL)
+            {
+                printf("Sorry, you may entered a wrong Username or Password, please try again. \n");
+                Login();
+            }
+            if(strcmp(p->username,tp1) == 0 && strcmp(p->password,tp2) == 0)
+            {
+                break;
+            }
+            p = p->next;
+        }
+        char *name;
+        name = (char *) malloc(100*sizeof (char));
+        strcpy(name,tp1);
+        name[strlen(name)-1] = '\0';
+        while(1){
+            printf(" \n");
+            printf("( logged in as: %s )\n", name);
+            printf("1) Borrow a book\n");
+            printf("2) Return a book\n");
+            printf("3) Search for books\n");
+            printf("4) Display all books\n");
+            printf("5) Log out\n");
+            printf("     Option: ");
+            int option;
+            while(1){
+                int j = 0;
+                scanf("%d", &option);
+                while(getchar() != '\n') j++;
+                if(j > 0) {
+                    printf("Sorry, the option you entered was invalid, please try again.\n");
+                    printf("( logged in as: %s )\n", name);
+                    printf("1) Borrow a book\n");
+                    printf("2) Return a book\n");
+                    printf("3) Search for books\n");
+                    printf("4) Display all books\n");
+                    printf("5) Log out\n");
+                    printf("     Option: ");
+                    continue;
+                }else break;
+            }
+            if (option == 1) {
+                break;
+            }else if(option == 2) {
+                break;
+            }else if(option == 3) {
+                break;
+            }else if(option == 4) {
+                Display_books_no_login();
+                break;
+            }else if(option == 5) {
+                printf("Thank you for logging, goodbye.\n");
+                main_menu();
+            }else if (option != 1 && option != 2 && option != 3 && option != 4 && option != 5){
+                printf("Sorry, the option you entered was invalid, please try again. \n");
+                continue;
+            }
+        }
     }
 }
 
+
+
+
 // choice 1
-int register_user()
-{
+int register_user(){
     FILE *fh;
+    char *tp1, *tp2, *tp3;
+    tp1 = (char *) malloc(100 * sizeof (char));
+    tp2 = (char *) malloc(100 * sizeof (char));
+    tp3 = (char *) malloc(100 * sizeof (char));
     fh = fopen("user.txt","a+");
     printf("Enter your Name: \n");
-    char *tp1;
-    tp1 = (char *) malloc(100 * sizeof (char));
     fflush(stdin);
-    gets(tp1);
+    scanf("%s",tp1);
+    getchar();
     printf("Enter your Username: \n");
-    char *tp2;
-    char *tp3;
-    tp2 = (char *) malloc(100 * sizeof (char));
     fflush(stdin);
-    gets(tp2);
+    scanf("%s",tp2);
+    getchar();
     printf("Enter your Password: \n");
-    tp3 = (char *) malloc(100 * sizeof (char));
     fflush(stdin);
-    gets(tp3);
+    scanf("%s",tp3);
+    getchar();
     if(strcmp( tp2, "librarian") == 0)
     {
         printf("The username you entered has already existed, please choose an option again.\n");
-        return 0;
+        main_menu();
     }
     User *tp;
-    tp = list;
+    tp = temp_list;
     tp = tp->next;
     if(tp != NULL)
     {
@@ -70,7 +201,7 @@ int register_user()
             {
                 tp->username[strlen(tp->username)] = '\n';
                 printf("The username you entered has already existed, please choose an option again.\n");
-                return 0;
+                main_menu();
             }
             tp->username[strlen(tp->username)] = '\n';
             tp = tp->next;
@@ -81,7 +212,7 @@ int register_user()
         }
     }
     User *head, *p, *last;
-    last = list;
+    last = temp_list;
     p = last;
     head = p -> next;
     while(1)
@@ -117,5 +248,5 @@ int register_user()
     fputs(tp1,fh);
     fputs("\n",fh);
     printf("Succeeded in creating an account. \n");
-    return 0;
+    main_menu();
 }
