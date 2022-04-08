@@ -62,8 +62,8 @@ BookList find_book_by_author (const char *author);
 BookList find_book_by_year (unsigned int year);
 
 typedef struct _user{
-    char *username; // Account for user.(username)
-    char *password; // Account for user.(password)
+    char *username;
+    char *password;
     char *name;
     int *book_id;
     struct _user *next;//pointer to the next user element.
@@ -71,5 +71,6 @@ typedef struct _user{
 
 User *temp_list;
 
+int book_search();
 
 #endif

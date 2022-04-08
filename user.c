@@ -50,40 +50,51 @@ int Login() {
                 }else break;
             }
             if (option == 1) {
-                char *temp;
-                Book book;
-                temp = (char *) malloc(200*sizeof (char));
+                char *t;
+                t = (char *) malloc(100*sizeof (char));
+                Book book_add;
                 printf("Enter the title of the book you wish to add: \n");
                 fflush(stdin);
-                gets(temp);
-                book.title = (char *) malloc(200*sizeof(char));
-                strcpy(book.title,temp);
+                gets(t);
+                book_add.title = (char *) malloc(100*sizeof(char));
+                strcpy(book_add.title,t);
                 printf("Enter the author of the book you wish to add: \n");
                 fflush(stdin);
-                gets(temp);
-                book.authors = (char *) malloc(200*sizeof(char));
-                strcpy(book.authors,temp);
+                gets(t);
+                book_add.authors = (char *) malloc(100*sizeof(char));
+                strcpy(book_add.authors,t);
                 printf("Enter the year that the book you wish to add: \n");
                 fflush(stdin);
-                gets(temp);
-                book.year = atoi(temp);
+                gets(t);
+                book_add.year = atoi(t);
                 printf("Enter the number of copies of the book that you wish to add: \n");
                 fflush(stdin);
-                gets(temp);
-                book.copies = atoi(temp);
-                free(temp);
-                add_book(book);
+                gets(t);
+                book_add.copies = atoi(t);
+                free(t);
+                add_book(book_add);
+                printf("You have made a change successfully, please login again to refresh routine.\n");
+                Login();
                 break;
             }else if(option == 2) {
+                char *n;
+                n = (char*) malloc(100*sizeof (char));
+                printf("Enter the ID(1~99) of the book you wish to remove: \n");
+                fflush(stdin);
+                gets(n);
+                Book book_remove;
+                book_remove.id = atoi(n);
+                remove_book(book_remove);
+                Login();
                 break;
             }else if(option == 3) {
-                break;
+                book_search();
             }else if(option == 4) {
                 Display_books_login();
-                break;
             }else if(option == 5) {
                 printf("Thank you for logging, goodbye.\n");
                 main_menu();
+                break;
             }else if (option != 1 && option != 2 && option != 3 && option != 4 && option != 5){
                 printf("Sorry, the option you entered was invalid, please try again. \n");
                 continue;
@@ -141,17 +152,17 @@ int Login() {
                 }else break;
             }
             if (option == 1) {
-                break;
+                book_borrow(name);
             }else if(option == 2) {
-                break;
+                book_return(name);
             }else if(option == 3) {
-                break;
+                book_search();
             }else if(option == 4) {
-                Display_books_no_login();
-                break;
+                Display_books_login();
             }else if(option == 5) {
                 printf("Thank you for logging, goodbye.\n");
                 main_menu();
+                break;
             }else if (option != 1 && option != 2 && option != 3 && option != 4 && option != 5){
                 printf("Sorry, the option you entered was invalid, please try again. \n");
                 continue;

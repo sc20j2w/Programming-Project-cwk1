@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 void Display_books_login() {
     printf("%s\t","ID");
     printf("%-30s\t","Title");
@@ -24,12 +25,10 @@ void Display_books_login() {
             printf("%-4d\t",p->year);
             printf("%-4d\n",p->copies);
             p = p->next;
-        }else{
-            printf("There isn't any books in the library yet ");
+        }else if (1){
             break;
         }
     }
-    main_menu();
     fflush(stdin);
 }
 
@@ -50,8 +49,7 @@ void Display_books_no_login() {
             printf("%-4d\t",p->year);
             printf("%-4d\n",p->copies);
             p = p->next;
-        }else{
-            printf("There isn't any books in the library yet ");
+        }else if (1){
             break;
         }
     }
@@ -60,15 +58,16 @@ void Display_books_no_login() {
 }
 
 
+
 //beginning of the system
 void main_menu() {
     while(1) {
         printf("Please choose an option:\n");
-        printf("1) Register an account \n");
-        printf("2) Login \n");
-        printf("3) Search for books \n");
-        printf("4) Display all books \n");
-        printf("5) Quit \n");
+        printf("1 Register an account \n");
+        printf("2 Login \n");
+        printf("3 Search for books \n");
+        printf("4 Display all books \n");
+        printf("5 Quit \n");
         printf("     option:");
         int option;
         while(1){
@@ -78,11 +77,11 @@ void main_menu() {
             if(j > 0) {
                 printf("Sorry, the option you entered was invalid, please try again.\n");
                 printf("Please choose an option:\n");
-                printf("1) Register an account \n");
-                printf("2) Login \n");
-                printf("3) Search for books \n");
-                printf("4) Display all books \n");
-                printf("5) Quit \n");
+                printf("1 Register an account \n");
+                printf("2 Login \n");
+                printf("3 Search for books \n");
+                printf("4 Display all books \n");
+                printf("5 Quit \n");
                 printf("     option:");
                 continue;
             }else break;
@@ -94,7 +93,7 @@ void main_menu() {
             Login();
             break;
         }else if(option == 3) {
-            break;
+            book_search();
         }else if(option == 4) {
             Display_books_no_login();
             break;
@@ -108,7 +107,6 @@ void main_menu() {
     }
 }
 
-void run_interface ()
-{
+void run_interface (){
     main_menu();
 }
