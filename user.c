@@ -10,6 +10,7 @@
 
 // choice 2
 int Login() {
+    int i;
     char *a = "librarian";
     char *tp1, *tp2;
     tp1 = (char *) malloc(100 * sizeof(char));
@@ -53,24 +54,36 @@ int Login() {
                 char *t;
                 t = (char *) malloc(100*sizeof (char));
                 Book book_add;
-                printf("Enter the title of the book you wish to add: \n");
+                printf("Enter the title of the book you want to add: \n");
                 fflush(stdin);
                 gets(t);
                 book_add.title = (char *) malloc(100*sizeof(char));
                 strcpy(book_add.title,t);
-                printf("Enter the author of the book you wish to add: \n");
+                printf("Enter the author of the book you want to add: \n");
                 fflush(stdin);
                 gets(t);
                 book_add.authors = (char *) malloc(100*sizeof(char));
                 strcpy(book_add.authors,t);
-                printf("Enter the year that the book you wish to add: \n");
+                printf("Enter the year(number) that the book you want to add: \n");
                 fflush(stdin);
                 gets(t);
-                book_add.year = atoi(t);
-                printf("Enter the number of copies of the book that you wish to add: \n");
+                i = atoi(t);
+                while( i <= 0 ){
+                    printf("Wrong number. Enter the year(number) that the book you want to add again: \n");
+                    gets(t);
+                    i = atoi(t);
+                }
+                book_add.year = i;
+                printf("Enter the number of copies(number) of the book that you want to add: \n");
                 fflush(stdin);
                 gets(t);
-                book_add.copies = atoi(t);
+                i = atoi(t);
+                while( i <= 0 ){
+                    printf("Wrong number. Enter the copies(number) that the book you want to add: \n");
+                    gets(t);
+                    i = atoi(t);
+                }
+                book_add.copies = i;
                 free(t);
                 add_book(book_add);
                 printf("You have made a change successfully, please login again to refresh routine.\n");
@@ -79,7 +92,7 @@ int Login() {
             }else if(option == 2) {
                 char *n;
                 n = (char*) malloc(100*sizeof (char));
-                printf("Enter the ID(1~99) of the book you wish to remove: \n");
+                printf("Enter the ID of the book you wish to remove: \n");
                 fflush(stdin);
                 gets(n);
                 Book book_remove;

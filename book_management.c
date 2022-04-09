@@ -291,7 +291,7 @@ int book_search(){
         }else if(option == 4) {
             printf("You've ended the search function.\n");
             break;
-        }else if (option != 1 && option != 2 && option != 3 && option != 4 && option != 5){
+        }else if (option != 1 && option != 2 && option != 3 && option != 4 ){
             printf("Sorry, the option you entered was invalid, please try again. \n");
             continue;
         }
@@ -335,7 +335,7 @@ int remove_book(Book book){
         {
             p->next = head->next;
             free(head);
-            printf("You succeeded in deleting the book! \n");
+            printf("You succeeded in deleting the book! please login again to refresh routine. \n");
             return 0;
         }
         p = head;
